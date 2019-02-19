@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Playing with CSS and JS</title>
+    <style>
+
+:root
+{
+    --base:#1db8f5;
+    --spacing:10px;
+    --blur:0px;
+}
+
+img{
+    padding: var(--spacing);
+    background: var(--base);
+    filter:blur(var(--blur));
+}
+
+.hl
+{
+color:var(--base);
+}
+
+
+    body
+    {
+        background-color: rgb(44, 44, 44);
+        text-align: center;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #a0d428;
+    }
+
+h2
+{
+    font-size: 3.5em;
+}
+
+label
+{
+    font-size: 1.5em;
+}
+    input
+    {
+        width: 150px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+    </style>
+</head>
+<body>
+    <h2>Playing with CSS and <span class="hl">JS</span></h2>
+
+    <div class="controls">
+
+
+<label for="spacing">Spacing:</label>
+<input type="range" name="spacing" id="spacing" min="10" max="100" value="10" data-sizing="px">
+
+<label for="blur">Blur:</label>
+<input type="range" name="blur" id="blur" min="0" max="100" value="0" data-sizing="px">
+
+<label for="base">BG Color:</label>
+<input type="color" name="base" id="base" value="#00bbee">
+    </div>
+
+    <img src="ssb_bg.jpg" alt="" width="800" height="400">
+
+    <script>
+    const inputs=document.querySelectorAll(".controls input");
+
+     function handleUpdate()
+     {
+         const suffix=this.dataset.sizing || '';
+         document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+         //document.documentElement.style.setProperty(`--${this.name}`,this.value);
+     }
+
+ inputs.forEach(input=>input.addEventListener('change',handleUpdate));
+ inputs.forEach(input=>input.addEventListener('mousemove',handleUpdate));
+    </script>
+</body>
+</html>
